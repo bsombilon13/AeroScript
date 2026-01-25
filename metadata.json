@@ -1,0 +1,7 @@
+{
+  "name": "AeroScript Master",
+  "description": "An automated flight procedure script management system with dynamic placeholder replacement and Gemini-powered text-to-speech for pilot and crew roles.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
