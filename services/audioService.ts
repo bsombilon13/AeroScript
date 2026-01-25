@@ -1,8 +1,5 @@
-
 import { GoogleGenAI, Modality } from "@google/genai";
 import { Role } from "../types";
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY! });
 
 function decode(base64: string) {
   const binaryString = atob(base64);
@@ -41,10 +38,16 @@ const VOICE_MAP: Record<Role, string> = {
 };
 
 export async function speak(text: string, role: Role): Promise<void> {
+  const apiKey = process.env.API_KEY;
+  if (!apiKey || apiKey === 'undefined') {
+    throw new Error("API_KEY environment variable is not set or is invalid. Please check your Vercel Environment Variables.");
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
+
   try {
     const voiceName = VOICE_MAP[role] || 'Zephyr';
     
-    // Using gemini-2.5-flash-preview-tts as requested
     const response = await ai.models.generateContent({
       model: "gemini-2.5-flash-preview-tts",
       contents: [{ parts: [{ text }] }],
