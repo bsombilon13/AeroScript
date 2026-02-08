@@ -1,4 +1,99 @@
-import { Procedure } from './types';
+import { Procedure, AirportData, AirlineData } from './types';
+
+export const AIRPORTS: AirportData[] = [
+  // --- ASIA (Expanded) ---
+  { icao: 'RJTT', name: 'Tokyo Haneda (HND)', runways: ['04', '05', '16L', '16R', '22', '23', '34L', '34R'], gates: ['105', '112', '140', '5'] },
+  { icao: 'RJAA', name: 'Tokyo Narita (NRT)', runways: ['16L', '16R', '34L', '34R'], gates: ['21', '34', '42', '51'] },
+  { icao: 'WSSS', name: 'Singapore Changi (SIN)', runways: ['02L', '02C', '02R', '20L', '20C', '20R'], gates: ['A1', 'B5', 'C20', 'D42', 'E5'] },
+  { icao: 'VHHH', name: 'Hong Kong (HKG)', runways: ['07L', '07R', '25L', '25R'], gates: ['5', '18', '24', '62', '511'] },
+  { icao: 'RKSI', name: 'Seoul Incheon (ICN)', runways: ['15L', '15R', '16L', '16R', '33L', '33R', '34L', '34R'], gates: ['10', '101', '250'] },
+  { icao: 'ZBAA', name: 'Beijing Capital (PEK)', runways: ['01', '18L', '18R', '19', '36L', '36R'], gates: ['T3-C', 'T2-A'] },
+  { icao: 'ZBAD', name: 'Beijing Daxing (PKX)', runways: ['01L', '11L', '17L', '17R', '19R', '29R', '35L', '35R'], gates: ['A01', 'B02', 'C03'] },
+  { icao: 'ZSPD', name: 'Shanghai Pudong (PVG)', runways: ['16L', '16R', '17L', '17R', '34L', '34R', '35L', '35R'], gates: ['G101', 'G120', 'D80'] },
+  { icao: 'RCTP', name: 'Taipei Taoyuan (TPE)', runways: ['05L', '05R', '23L', '23R'], gates: ['A1', 'B5', 'C10', 'D7'] },
+  { icao: 'WMKK', name: 'Kuala Lumpur (KUL)', runways: ['14L', '14R', '15', '32L', '32R', '33'], gates: ['A2', 'B10', 'C1', 'G4'] },
+  { icao: 'VTBS', name: 'Bangkok Suvarnabhumi (BKK)', runways: ['01L', '01R', '19L', '19R'], gates: ['D1', 'E5', 'G2'] },
+  { icao: 'VIDP', name: 'Delhi Indira Gandhi (DEL)', runways: ['09', '10', '11', '27', '28', '29'], gates: ['1', '12', 'T3-14'] },
+  { icao: 'VABB', name: 'Mumbai Chhatrapati (BOM)', runways: ['09', '14', '27', '32'], gates: ['M1', 'P5', 'T2-10'] },
+  { icao: 'WIII', name: 'Jakarta Soekarno-Hatta (CGK)', runways: ['07L', '07R', '25L', '25R'], gates: ['D1', 'E2', 'F5'] },
+  { icao: 'RPLL', name: 'Manila Ninoy Aquino (MNL)', runways: ['06', '13', '24', '31'], gates: ['1', '7', '15'] },
+  { icao: 'VVTS', name: 'Ho Chi Minh Tan Son Nhat (SGN)', runways: ['07L', '07R', '25L', '25R'], gates: ['1', '12', '18'] },
+  
+  // --- MIDDLE EAST ---
+  { icao: 'OMDB', name: 'Dubai Intl (DXB)', runways: ['12L', '12R', '30L', '30R'], gates: ['A1', 'B12', 'C5', 'F1'] },
+  { icao: 'OTHH', name: 'Doha Hamad (DOH)', runways: ['16L', '16R', '34L', '34R'], gates: ['A1', 'B5', 'C10', 'E2'] },
+  { icao: 'OERK', name: 'Riyadh King Khalid (RUH)', runways: ['15L', '15R', '33L', '33R'], gates: ['11', '24', '36'] },
+  { icao: 'LTFM', name: 'Istanbul Airport (IST)', runways: ['16L', '16R', '17L', '17R', '18', '34L', '34R', '35L', '35R', '36'], gates: ['A1', 'B5', 'F12', 'G1'] },
+
+  // --- EUROPE ---
+  { icao: 'EGLL', name: 'London Heathrow (LHR)', runways: ['09L', '09R', '27L', '27R'], gates: ['A14', 'A22', 'B36', 'B42', 'C54'] },
+  { icao: 'LFPG', name: 'Paris Charles de Gaulle (CDG)', runways: ['08L', '08R', '09L', '09R', '26L', '26R', '27L', '27R'], gates: ['E21', 'F12', 'G04'] },
+  { icao: 'EHAM', name: 'Amsterdam Schiphol (AMS)', runways: ['06', '09', '18C', '18L', '18R', '22', '24', '27', '36C', '36L', '36R'], gates: ['D10', 'E4', 'F7'] },
+  { icao: 'EDDF', name: 'Frankfurt (FRA)', runways: ['07L', '07C', '07R', '25L', '25C', '25R', '18'], gates: ['A1', 'B20', 'C15'] },
+  { icao: 'LEMD', name: 'Madrid Barajas (MAD)', runways: ['14L', '14R', '18L', '18R', '32L', '32R', '36L', '36R'], gates: ['T4-10', 'T2-5'] },
+  { icao: 'LSZH', name: 'Zurich (ZRH)', runways: ['10', '14', '16', '28', '32', '34'], gates: ['A5', 'B12', 'E22'] },
+
+  // --- NORTH AMERICA ---
+  { icao: 'KJFK', name: 'New York JFK (JFK)', runways: ['04L', '04R', '13L', '13R', '22L', '22R', '31L', '31R'], gates: ['1', '4', '12', '25'] },
+  { icao: 'KLAX', name: 'Los Angeles (LAX)', runways: ['06L', '06R', '07L', '07R', '24L', '24R', '25L', '25R'], gates: ['10', '24', '101', '150'] },
+  { icao: 'KSFO', name: 'San Francisco (SFO)', runways: ['01L', '01R', '10L', '10R', '19L', '19R', '28L', '28R'], gates: ['A1', 'B15', 'F4', 'G92'] },
+  { icao: 'KORD', name: 'Chicago O\'Hare (ORD)', runways: ['04L', '04R', '09L', '09C', '09R', '10L', '10C', '10R', '22L', '22R', '27L', '27C', '27R', '28L', '28C', '28R'], gates: ['B1', 'C18', 'K5', 'M10'] },
+  { icao: 'CYYZ', name: 'Toronto Pearson (YYZ)', runways: ['05', '06L', '06R', '15L', '15R', '23', '24L', '24R', '33L', '33R'], gates: ['120', '135', '512'] },
+
+  // --- OCEANIA ---
+  { icao: 'YSSY', name: 'Sydney Kingsford Smith (SYD)', runways: ['07', '16L', '16R', '25', '34L', '34R'], gates: ['8', '24', '50', '63'] },
+  { icao: 'NZAA', name: 'Auckland (AKL)', runways: ['05L', '05R', '23L', '23R'], gates: ['2', '8', '15'] },
+
+  // --- SOUTH AMERICA ---
+  { icao: 'SBGR', name: 'São Paulo Guarulhos (GRU)', runways: ['09L', '09R', '27L', '27R'], gates: ['201', '205', '304', '312'] },
+  { icao: 'SAEZ', name: 'Buenos Aires Ezeiza (EZE)', runways: ['11', '17', '29', '35'], gates: ['1', '8', '14'] },
+
+  // --- AFRICA ---
+  { icao: 'FAOR', name: 'Johannesburg (JNB)', runways: ['03L', '03R', '21L', '21R'], gates: ['A1', 'B5', 'C12'] },
+  { icao: 'HECA', name: 'Cairo (CAI)', runways: ['05C', '05L', '05R', '23C', '23L', '23R'], gates: ['T3-G1', 'T2-F'] }
+];
+
+export const AIRLINES: AirlineData[] = [
+  // --- ASIA (Expanded) ---
+  { name: 'Singapore Airlines', callsign: 'SIA', domain: 'singaporeair.com' },
+  { name: 'Cathay Pacific', callsign: 'CPA', domain: 'cathaypacific.com' },
+  { name: 'Japan Airlines', callsign: 'JAL', domain: 'jal.co.jp' },
+  { name: 'All Nippon Airways', callsign: 'ANA', domain: 'ana.co.jp' },
+  { name: 'Korean Air', callsign: 'KAL', domain: 'koreanair.com' },
+  { name: 'Asiana Airlines', callsign: 'AAR', domain: 'flyasiana.com' },
+  { name: 'Thai Airways', callsign: 'THA', domain: 'thaiairways.com' },
+  { name: 'Air India', callsign: 'AIC', domain: 'airindia.in' },
+  { name: 'IndiGo', callsign: 'IGO', domain: 'goindigo.in' },
+  { name: 'Vietnam Airlines', callsign: 'HVN', domain: 'vietnamairlines.com' },
+  { name: 'Malaysia Airlines', callsign: 'MAS', domain: 'malaysiaairlines.com' },
+  { name: 'Garuda Indonesia', callsign: 'GIA', domain: 'garuda-indonesia.com' },
+  { name: 'EVA Air', callsign: 'EVA', domain: 'evaair.com' },
+  { name: 'China Eastern', callsign: 'CES', domain: 'ceair.com' },
+  { name: 'China Southern', callsign: 'CSN', domain: 'csair.com' },
+  { name: 'Air China', callsign: 'CCA', domain: 'airchina.com.cn' },
+  { name: 'Philippine Airlines', callsign: 'PAL', domain: 'philippineairlines.com' },
+  
+  // --- MIDDLE EAST ---
+  { name: 'Emirates', callsign: 'UAE', domain: 'emirates.com' },
+  { name: 'Qatar Airways', callsign: 'QTR', domain: 'qatarairways.com' },
+  { name: 'Etihad Airways', callsign: 'ETD', domain: 'etihad.ae' },
+  { name: 'Turkish Airlines', callsign: 'THY', domain: 'turkishairlines.com' },
+  { name: 'Saudia', callsign: 'SVA', domain: 'saudia.com' },
+
+  // --- GLOBAL ---
+  { name: 'British Airways', callsign: 'BAW', domain: 'britishairways.com' },
+  { name: 'Lufthansa', callsign: 'DLH', domain: 'lufthansa.com' },
+  { name: 'Air France', callsign: 'AFR', domain: 'airfrance.com' },
+  { name: 'KLM Royal Dutch', callsign: 'KLM', domain: 'klm.com' },
+  { name: 'United Airlines', callsign: 'UAL', domain: 'united.com' },
+  { name: 'Delta Air Lines', callsign: 'DAL', domain: 'delta.com' },
+  { name: 'American Airlines', callsign: 'AAL', domain: 'aa.com' },
+  { name: 'Qantas', callsign: 'QFA', domain: 'qantas.com.au' },
+  { name: 'Air Canada', callsign: 'ACA', domain: 'aircanada.com' },
+  { name: 'LATAM Airlines', callsign: 'LAN', domain: 'latamairlines.com' }
+];
+
+export const ATIS_CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export const MASTER_SCRIPT: Procedure[] = [
   {

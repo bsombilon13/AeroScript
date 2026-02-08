@@ -1,4 +1,3 @@
-
 export type Role = 'Pilot' | 'ATC' | 'Cabin Crew' | 'Captain PA';
 
 export interface ScriptLine {
@@ -13,6 +12,19 @@ export interface Procedure {
   title: string;
   icon: string;
   lines: ScriptLine[];
+}
+
+export interface AirportData {
+  icao: string;
+  name: string;
+  runways: string[];
+  gates: string[];
+}
+
+export interface AirlineData {
+  name: string;
+  callsign: string;
+  domain?: string;
 }
 
 export interface FlightDetails {
