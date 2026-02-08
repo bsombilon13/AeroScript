@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 import { FlightDetails } from './types';
-import { MASTER_SCRIPT } from './constants';
+import { MASTER_SCRIPT, AIRCRAFT_MODELS } from './constants';
 import { FlightControls } from './components/FlightControls';
 import { ProcedureSection } from './components/ProcedureSection';
 
 const DEFAULT_DETAILS: FlightDetails = {
-  airline: 'Speedbird',
+  airline: 'Singapore Airlines',
+  aircraft: 'B789',
   flightCode: '173',
-  origin: 'EGLL',
-  destination: 'KJFK',
-  gate: '12',
+  origin: 'WSSS',
+  destination: 'RJTT',
+  gate: 'A1',
   timeOfDay: 'afternoon',
   departureFreq: '121.97',
   squawk: '4521',
-  runway: '27R',
-  landingRunway: '04L',
+  runway: '02L',
+  landingRunway: '34L',
   atis: 'D',
   altitude: '38,000',
   flightTime: '7.5',
@@ -31,6 +32,8 @@ const App: React.FC = () => {
       setDetails(DEFAULT_DETAILS);
     }
   };
+
+  const selectedAircraftLabel = AIRCRAFT_MODELS.find(a => a.value === details.aircraft)?.label || details.aircraft;
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-200">
@@ -120,6 +123,10 @@ const App: React.FC = () => {
               <span className="block text-[8px] text-slate-500 font-black uppercase tracking-tighter">Flight Identifier</span>
               <span className="block text-xs font-bold text-white">{details.airline} {details.flightCode}</span>
             </div>
+            <div className="space-y-1">
+              <span className="block text-[8px] text-slate-500 font-black uppercase tracking-tighter">Equipment</span>
+              <span className="block text-xs font-bold text-blue-400">{selectedAircraftLabel}</span>
+            </div>
             <div className="space-y-1 hidden sm:block">
               <span className="block text-[8px] text-slate-500 font-black uppercase tracking-tighter">Squawk Code</span>
               <span className="block text-xs font-mono font-bold text-orange-500">{details.squawk}</span>
@@ -130,7 +137,7 @@ const App: React.FC = () => {
                 <span className="text-[10px] font-bold text-blue-400 tracking-widest">DIGITAL FLIGHT FOLDER</span>
              </div>
              <div className="flex flex-col text-right">
-                <span className="text-[9px] font-bold text-slate-600 tracking-widest">VER: 2.0.0-PRO</span>
+                <span className="text-[9px] font-bold text-slate-600 tracking-widest">VER: 2.1.0-PRO</span>
                 <span className="text-[9px] font-bold text-slate-600 tracking-widest uppercase">Standard Ops Only</span>
              </div>
           </div>

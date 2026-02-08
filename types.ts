@@ -32,6 +32,7 @@ export interface FlightDetails {
   destination: string;
   flightCode: string;
   airline: string;
+  aircraft: string;
   gate: string;
   departureFreq: string;
   squawk: string;

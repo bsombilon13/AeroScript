@@ -93,119 +93,178 @@ export const AIRLINES: AirlineData[] = [
   { name: 'LATAM Airlines', callsign: 'LAN', domain: 'latamairlines.com' }
 ];
 
+export const AIRCRAFT_MODELS = [
+  { label: 'Airbus A220-300', value: 'A223' },
+  { label: 'Airbus A319', value: 'A319' },
+  { label: 'Airbus A320neo', value: 'A20N' },
+  { label: 'Airbus A321neo', value: 'A21N' },
+  { label: 'Airbus A330-900neo', value: 'A339' },
+  { label: 'Airbus A340-600', value: 'A346' },
+  { label: 'Airbus A350-900', value: 'A359' },
+  { label: 'Airbus A350-1000', value: 'A35K' },
+  { label: 'Airbus A380-800', value: 'A388' },
+  { label: 'Boeing 737-800', value: 'B738' },
+  { label: 'Boeing 737 MAX 8', value: 'B38M' },
+  { label: 'Boeing 747-400', value: 'B744' },
+  { label: 'Boeing 747-8i', value: 'B748' },
+  { label: 'Boeing 757-200', value: 'B752' },
+  { label: 'Boeing 767-300ER', value: 'B763' },
+  { label: 'Boeing 777-200LR', value: 'B77L' },
+  { label: 'Boeing 777-300ER', value: 'B77W' },
+  { label: 'Boeing 777F', value: 'B77F' },
+  { label: 'Boeing 787-8 Dreamliner', value: 'B788' },
+  { label: 'Boeing 787-9 Dreamliner', value: 'B789' },
+  { label: 'Boeing 787-10 Dreamliner', value: 'B78X' },
+  { label: 'Embraer E175', value: 'E175' },
+  { label: 'Embraer E190-E2', value: 'E290' },
+  { label: 'Bombardier CRJ-900', value: 'CRJ9' },
+  { label: 'ATR 72-600', value: 'AT76' },
+  { label: 'Concorde', value: 'CONC' },
+  { label: 'Gulfstream G650', value: 'GLF6' },
+  { label: 'Cessna 172 Skyhawk', value: 'C172' }
+];
+
 export const ATIS_CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
 export const MASTER_SCRIPT: Procedure[] = [
   {
-    id: 'boarding',
-    title: 'BOARDING & CABIN PREPARATION',
-    icon: '👥',
+    id: 'aircraft-prep',
+    title: '1. AIRCRAFT PREPARATION',
+    icon: '⚡',
     lines: [
-      { id: 'b1', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Good {timeOfDay}, ladies and gentlemen. On behalf of {airline} and the entire crew, we welcome you aboard flight {flightCode} to {destination}.' },
-      { id: 'b2', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Please ensure your carry-on luggage is safely stowed in the overhead bins or under the seat in front of you. Emergency exits must remain clear of all items.' },
-      { id: 'b3', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Cabin crew, boarding is complete. Please secure the cabin for departure and report.' },
-      { id: 'b4', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Cabin crew, all doors closed and armed. Cross-check.' }
+      { id: 'ap1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Good morning. Let’s start the pre-flight checks.' },
+      { id: 'ap2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Pre-flight checklist initiated.' },
+      { id: 'ap3', speaker: 'Pilot', icon: '👨‍✈️', text: 'IRS aligning, estimated alignment time 7 minutes.' },
+      { id: 'ap4', speaker: 'Pilot', icon: '👨‍✈️', text: 'Copy.' },
+      { id: 'ap5', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Good morning Captain, cabin crew onboard. Cabin preparation commencing.' },
+      { id: 'ap6', speaker: 'Pilot', icon: '👨‍✈️', text: 'Good morning. Estimated departure in 45 minutes. Please advise when cabin is ready.' }
     ]
   },
   {
-    id: 'pre-departure',
-    title: 'PRE-FLIGHT – ATC CLEARANCE',
-    icon: '📋',
+    id: 'boarding-phase',
+    title: '2. BOARDING PHASE',
+    icon: '👥',
     lines: [
-      { id: 'l1', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Delivery, {airline} {flightCode}, gate {gate}, request IFR clearance to {destination} with information {atis}.' },
-      { id: 'l2', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, cleared to {destination} via the {origin} departure, then as filed. Maintain {altitude}, squawk {squawk}.' },
-      { id: 'l3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared to {destination} via {origin} departure, maintain {altitude}, squawk {squawk}. {airline} {flightCode}.' },
-      { id: 'l4', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Ladies and gentlemen, we expect a smooth flight today with a flight time of {flightTime} hours. We will be departing shortly. Cabin crew, safety demonstration please.' }
+      { id: 'bp1', speaker: 'Cabin Crew', icon: '📢', text: 'Good morning ladies and gentlemen, welcome aboard {airline} Flight {flightCode} to {destination}. Boarding has now commenced. Please have your boarding passes ready and follow crew instructions. Thank you.' },
+      { id: 'bp2', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Captain, boarding has started. Estimated completion in 20 minutes.' },
+      { id: 'bp3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Copy. Please advise when boarding is complete.' }
+    ]
+  },
+  {
+    id: 'before-start',
+    title: '3. BEFORE START / DOORS CLOSED',
+    icon: '🚪',
+    lines: [
+      { id: 'bs1', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Captain, boarding complete. All passengers seated. Cabin secure.' },
+      { id: 'bs2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Thank you. Please arm doors and cross-check.' },
+      { id: 'bs3', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Doors armed and cross-checked.' },
+      { id: 'bs4', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Ladies and gentlemen, this is your captain speaking. Welcome aboard {airline} Flight {flightCode}. Our flight time today will be approximately {flightTime} hours. Please ensure your seatbelts are fastened and electronic devices are set to flight mode. Cabin crew, prepare for departure.' }
     ]
   },
   {
     id: 'push-start',
-    title: 'PUSHBACK & ENGINE START',
+    title: '4. PUSHBACK & ENGINE START',
     icon: '🔄',
     lines: [
-      { id: 'l7', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Ground, {airline} {flightCode}, request pushback and engine start.' },
-      { id: 'l8', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, push and start approved. Tail north, face south. Contact Ground on {groundFreq} when ready to taxi.' },
-      { id: 'l9', speaker: 'Pilot', icon: '👨‍✈️', text: 'Push and start approved, face south, {airline} {flightCode}.' },
-      { id: 'l10', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Ladies and gentlemen, please observe the seatbelt sign. Ensure your seatback is in the full upright position and your tray table is stowed.' }
+      { id: 'ps1', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Delivery, {airline} {flightCode}, request IFR clearance to {destination}.' },
+      { id: 'ps2', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, cleared to {destination} via {origin} departure, climb initially {altitude}, squawk {squawk}.' },
+      { id: 'ps3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared to {destination} via {origin} departure, initial climb {altitude}, squawk {squawk}, {airline} {flightCode}.' },
+      { id: 'ps4', speaker: 'Pilot', icon: '👨‍✈️', text: 'Ground, {airline} {flightCode} at gate {gate}, request pushback and engine start.' },
+      { id: 'ps5', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, pushback approved, face west.' },
+      { id: 'ps6', speaker: 'Pilot', icon: '👨‍✈️', text: 'Pushback approved, face west, {airline} {flightCode}.' },
+      { id: 'ps7', speaker: 'Pilot', icon: '👨‍✈️', text: 'Clear to start engine one.' },
+      { id: 'ps8', speaker: 'Pilot', icon: '👨‍✈️', text: 'Starting engine one.' },
+      { id: 'ps9', speaker: 'Pilot', icon: '👨‍✈️', text: 'Engine one stabilized. Start engine two.' }
     ]
   },
   {
     id: 'taxi',
-    title: 'TAXI – RUNWAY PROCEEDURE',
+    title: '5. TAXI',
     icon: '🚕',
     lines: [
-      { id: 'l11', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Ground, {airline} {flightCode}, ready for taxi with information {atis}.' },
-      { id: 'l12', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, taxi to holding point runway {runway} via taxiway Bravo. Cross runway 16.' },
-      { id: 'l13', speaker: 'Pilot', icon: '👨‍✈️', text: 'Taxi to holding point runway {runway} via Bravo, crossing runway 16. {airline} {flightCode}.' },
-      { id: 'l14', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Cabin crew, take your seats for takeoff.' }
+      { id: 'tx1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Ground, {airline} {flightCode} ready to taxi.' },
+      { id: 'tx2', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, taxi to runway {runway} via Alpha, Bravo, hold short Runway {runway}.' },
+      { id: 'tx3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Taxi to runway {runway} via Alpha, Bravo, hold short Runway {runway}, {airline} {flightCode}.' },
+      { id: 'tx4', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Cabin crew, please be seated for takeoff.' }
     ]
   },
   {
     id: 'takeoff',
-    title: 'TAKEOFF & INITIAL CLIMB',
+    title: '6. LINE-UP & TAKEOFF',
     icon: '🛫',
     lines: [
-      { id: 'l15', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Tower, {airline} {flightCode}, holding short runway {runway}, ready for departure.' },
-      { id: 'l16', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, runway {runway}, wind 260 at 10, cleared for takeoff.' },
-      { id: 'l17', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared for takeoff runway {runway}. {airline} {flightCode}.' },
-      { id: 'l18', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, contact Departure on {departureFreq}. Have a safe flight.' }
+      { id: 'to1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Tower, {airline} {flightCode} holding short Runway {runway}, ready for departure.' },
+      { id: 'to2', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, line up and wait Runway {runway}.' },
+      { id: 'to3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Line up and wait Runway {runway}, {airline} {flightCode}.' },
+      { id: 'to4', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, wind 260 at 10, Runway {runway} cleared for takeoff.' },
+      { id: 'to5', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared for takeoff Runway {runway}, {airline} {flightCode}.' },
+      { id: 'to6', speaker: 'Pilot', icon: '👨‍✈️', text: 'Thrust set. Checked. 80 knots. Checked. V1. Rotate. Positive climb. Gear up.' }
     ]
   },
   {
-    id: 'climb-cruise',
-    title: 'CLIMB & CRUISE SERVICE',
-    icon: '☁️',
+    id: 'climb-departure',
+    title: '7. CLIMB & DEPARTURE',
+    icon: '📈',
     lines: [
-      { id: 'l19', speaker: 'Pilot', icon: '👨‍✈️', text: '{origin} Departure, {airline} {flightCode} is with you, passing 2,500 for {altitude}.' },
-      { id: 'l20', speaker: 'Captain PA', icon: '👨‍✈️', text: 'We have reached our cruising altitude of {altitude} feet. I have turned off the seatbelt sign, but please keep it fastened while seated.' },
-      { id: 'l21', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'We will now begin our in-flight service. We have a selection of meals and beverages available for purchase. Please refer to the menu in your seat pocket.' }
+      { id: 'cd1', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, climb and maintain FL{altitude}.' },
+      { id: 'cd2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Climb and maintain FL{altitude}, {airline} {flightCode}.' },
+      { id: 'cd3', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Ladies and gentlemen, we have reached our cruising altitude. You may now move about the cabin when the seatbelt sign is turned off.' }
     ]
   },
   {
-    id: 'descent',
-    title: 'DESCENT – APPROACH PREP',
+    id: 'cruise-phase',
+    title: '8. CRUISE PHASE',
+    icon: '✈️',
+    lines: [
+      { id: 'cr1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cruise checklist.' },
+      { id: 'cr2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cruise checklist complete.' },
+      { id: 'cr3', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Captain, cabin service commencing.' },
+      { id: 'cr4', speaker: 'Pilot', icon: '👨‍✈️', text: 'Approved.' }
+    ]
+  },
+  {
+    id: 'descent-prep',
+    title: '9. DESCENT PREPARATION',
     icon: '📉',
     lines: [
-      { id: 'l22', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, descend and maintain FL120. Contact {destination} Approach on {approachFreq}.' },
-      { id: 'l23', speaker: 'Pilot', icon: '👨‍✈️', text: '{destination} Approach, {airline} {flightCode}, descending FL120 with information {atis}.' },
-      { id: 'l24', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, expect ILS approach runway {landingRunway}. Descend and maintain 3,000 feet, QNH 1013.' },
-      { id: 'l25', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Ladies and gentlemen, we have begun our descent into {destination}. Please ensure all electronic devices are in flight mode and your seatbelts are securely fastened.' }
+      { id: 'dp1', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, descend and maintain FL120.' },
+      { id: 'dp2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Descend and maintain FL120, {airline} {flightCode}.' },
+      { id: 'dp3', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Ladies and gentlemen, we have started our descent into {destination}. Please return to your seats and fasten your seatbelts.' }
     ]
   },
   {
-    id: 'final-approach',
-    title: 'FINAL – LANDING CLEARANCE',
+    id: 'approach-landing',
+    title: '10. APPROACH & LANDING',
     icon: '🎯',
     lines: [
-      { id: 'l26', speaker: 'Pilot', icon: '👨‍✈️', text: '{destination} Tower, {airline} {flightCode}, established on the ILS runway {landingRunway}.' },
-      { id: 'l27', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, continue approach runway {landingRunway}. You are number 1.' },
-      { id: 'l28', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, runway {landingRunway}, cleared to land. Wind 240 at 8.' },
-      { id: 'l29', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared to land runway {landingRunway}. {airline} {flightCode}.' },
-      { id: 'l29a', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Ladies and gentlemen, we are now on our final approach to {destination}. Please ensure your seatbelt is securely fastened, your tray table is stowed, and your window shade is open.' },
-      { id: 'l30a', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Cabin crew, please perform final checks of the cabin for landing.' },
-      { id: 'l30', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Cabin crew, take your seats for landing.' }
+      { id: 'al1', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, cleared ILS Runway {landingRunway}.' },
+      { id: 'al2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared ILS Runway {landingRunway}, {airline} {flightCode}.' },
+      { id: 'al3', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, wind 240 at 8, Runway {landingRunway} cleared to land.' },
+      { id: 'al4', speaker: 'Pilot', icon: '👨‍✈️', text: 'Cleared to land Runway {landingRunway}, {airline} {flightCode}.' },
+      { id: 'al5', speaker: 'Pilot', icon: '👨‍✈️', text: 'Minimums. Landing. Spoilers deployed. Reverse green.' }
     ]
   },
   {
-    id: 'taxi-gate',
-    title: 'POST-LANDING – TAXI TO GATE',
+    id: 'taxi-in',
+    title: '11. AFTER LANDING & TAXI IN',
     icon: '🛣️',
     lines: [
-      { id: 'l32', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, welcome to {destination}. Vacate right on Delta, contact Ground on {groundFreq}.' },
-      { id: 'l33', speaker: 'Pilot', icon: '👨‍✈️', text: '{destination} Ground, {airline} {flightCode}, runway vacated on Delta, request taxi to gate {gate}.' },
-      { id: 'l34', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, taxi to gate {gate} via Delta and Alpha. Cross runway 22.' }
+      { id: 'ti1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Ground, {airline} {flightCode} clear of Runway {landingRunway}, request taxi to gate.' },
+      { id: 'ti2', speaker: 'ATC', icon: '🗼', text: '{airline} {flightCode}, taxi to gate {gate} via Alpha.' },
+      { id: 'ti3', speaker: 'Pilot', icon: '👨‍✈️', text: 'Taxi to gate {gate} via Alpha, {airline} {flightCode}.' },
+      { id: 'ti4', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Ladies and gentlemen, welcome to {destination}. Please remain seated until the seatbelt sign is turned off.' }
     ]
   },
   {
-    id: 'arrival',
-    title: 'ARRIVAL – GATE OPERATIONS',
+    id: 'parking-shutdown',
+    title: '12. PARKING & ENGINE SHUTDOWN',
     icon: '🏁',
     lines: [
-      { id: 'l36', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Welcome to {destination}. Please remain seated until the aircraft has come to a complete stop and the seatbelt sign is off.' },
-      { id: 'l36a', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Ladies and gentlemen, we have arrived at the gate. Please remain seated until the seatbelt sign has been turned off and the Captain indicates it is safe to disembark. Thank you for flying {airline}!' },
-      { id: 'l37', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'We hope you enjoyed your flight. Please check your surroundings for any personal items before you disembark.' },
-      { id: 'l38', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Cabin crew, doors disarmed and cross-check. Ground staff, you may approach the aircraft.' },
-      { id: 'l39', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Ladies and gentlemen, the seatbelt sign has been turned off. You may now collect your belongings and disembark through the forward doors. Thank you for flying {airline}!' }
+      { id: 'ps1', speaker: 'Pilot', icon: '👨‍✈️', text: 'Parking brake set. Shutdown checklist.' },
+      { id: 'ps2', speaker: 'Pilot', icon: '👨‍✈️', text: 'Engines shut down. Checklist complete.' },
+      { id: 'ps3', speaker: 'Cabin Crew', icon: '👩‍✈️', text: 'Captain, doors disarmed.' },
+      { id: 'ps4', speaker: 'Pilot', icon: '👨‍✈️', text: 'Thank you. You may open the doors.' },
+      { id: 'ps5', speaker: 'Captain PA', icon: '👨‍✈️', text: 'Thank you for flying with us today. On behalf of {airline} and the entire crew, we wish you a pleasant stay in {destination}.' }
     ]
   }
 ];

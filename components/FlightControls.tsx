@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useRef, useEffect } from 'react';
 import { FlightDetails } from '../types';
-import { AIRPORTS, AIRLINES, ATIS_CODES } from '../constants';
+import { AIRPORTS, AIRLINES, ATIS_CODES, AIRCRAFT_MODELS } from '../constants';
 
 interface Props {
   details: FlightDetails;
@@ -10,6 +10,7 @@ interface Props {
 
 const TOOLTIPS: Record<string, string> = {
   airline: "The operating carrier's name used in callsigns and announcements.",
+  aircraft: "The aircraft type and model for this flight.",
   flightCode: "The specific flight number (e.g., 173).",
   origin: "Departure airport code (ICAO).",
   destination: "Arrival airport code (ICAO).",
@@ -136,6 +137,7 @@ export const FlightControls: React.FC<Props> = ({ details, onChange, onReset }) 
   const [isRefreshingAtis, setIsRefreshingAtis] = useState(false);
   const sortedAirports = useMemo(() => [...AIRPORTS].sort((a, b) => a.name.localeCompare(b.name)), []);
   const sortedAirlines = useMemo(() => [...AIRLINES].sort((a, b) => a.name.localeCompare(b.name)), []);
+  const sortedAircraft = useMemo(() => [...AIRCRAFT_MODELS].sort((a, b) => a.label.localeCompare(b.label)), []);
 
   const originAirport = useMemo(() => AIRPORTS.find(a => a.icao === details.origin), [details.origin]);
   const destAirport = useMemo(() => AIRPORTS.find(a => a.icao === details.destination), [details.destination]);
@@ -282,6 +284,19 @@ export const FlightControls: React.FC<Props> = ({ details, onChange, onReset }) 
             }))}
           />
 
+          <SearchableSelect 
+            label="Aircraft Model"
+            name="aircraft"
+            value={details.aircraft}
+            onChange={handleFieldChange}
+            tooltip={TOOLTIPS.aircraft}
+            options={sortedAircraft.map(a => ({ 
+              value: a.value, 
+              label: a.label, 
+              sublabel: a.value
+            }))}
+          />
+
           {renderInput('flightCode', 'Flight Code', '452')}
 
           <SearchableSelect 
@@ -325,7 +340,9 @@ export const FlightControls: React.FC<Props> = ({ details, onChange, onReset }) 
           {renderInput('altitude', 'Altitude', '35000')}
           {renderInput('squawk', 'Squawk', '4522')}
           {renderInput('departureFreq', 'Dep Freq', '121.9')}
-          {renderInput('approachFreq', 'App Freq', '119.7')}
+          <div className="hidden xl:block">
+            {renderInput('approachFreq', 'App Freq', '119.7')}
+          </div>
           <div className="hidden xl:block">
             {renderInput('groundFreq', 'Gnd Freq', '121.7')}
           </div>
