@@ -1,29 +1,36 @@
-
 import React, { useState } from 'react';
 import { FlightDetails } from './types';
 import { MASTER_SCRIPT } from './constants';
 import { FlightControls } from './components/FlightControls';
 import { ProcedureSection } from './components/ProcedureSection';
 
+const DEFAULT_DETAILS: FlightDetails = {
+  airline: 'Speedbird',
+  flightCode: '173',
+  origin: 'London',
+  destination: 'New York',
+  gate: 'A14',
+  timeOfDay: 'afternoon',
+  departureFreq: '121.97',
+  squawk: '4521',
+  runway: '27R',
+  landingRunway: '04L',
+  atis: 'DELTA',
+  altitude: '38,000',
+  flightTime: '7.5',
+  groundFreq: '121.85',
+  towerFreq: '118.50',
+  approachFreq: '125.75'
+};
+
 const App: React.FC = () => {
-  const [details, setDetails] = useState<FlightDetails>({
-    airline: 'Speedbird',
-    flightCode: '173',
-    origin: 'London',
-    destination: 'New York',
-    gate: 'A14',
-    timeOfDay: 'afternoon',
-    departureFreq: '121.97',
-    squawk: '4521',
-    runway: '27R',
-    landingRunway: '04L',
-    atis: 'DELTA',
-    altitude: '38,000',
-    flightTime: '7.5',
-    groundFreq: '121.85',
-    towerFreq: '118.50',
-    approachFreq: '125.75'
-  });
+  const [details, setDetails] = useState<FlightDetails>(DEFAULT_DETAILS);
+
+  const handleReset = () => {
+    if (window.confirm("Reset all flight details to defaults?")) {
+      setDetails(DEFAULT_DETAILS);
+    }
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 text-slate-200">
@@ -64,7 +71,11 @@ const App: React.FC = () => {
       </header>
 
       {/* Inputs */}
-      <FlightControls details={details} onChange={setDetails} />
+      <FlightControls 
+        details={details} 
+        onChange={setDetails} 
+        onReset={handleReset}
+      />
 
       {/* Main Content */}
       <main className="flex-grow flex p-6 gap-8 max-w-7xl mx-auto w-full">
