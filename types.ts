@@ -24,6 +24,8 @@ export interface FlightDetails {
   departureFreq: string;
   squawk: string;
   runway: string;
+  landingRunway: string;
+  atis: string;
   altitude: string;
   flightTime: string;
   timeOfDay: 'morning' | 'afternoon' | 'evening';
